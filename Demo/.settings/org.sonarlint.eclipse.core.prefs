@@ -1,0 +1,4 @@
+autoEnabled=true
+bindingSuggestionsDisabled=false
+eclipse.preferences.version=1
+fileExclusions=FILE\:src/com/functionalPrograms/MergeRemoveDuplicates.java\r\nFILE\:src/com/functionalPrograms/SomeOfDigit.java
