@@ -1,7 +1,7 @@
 package com.functionalPrograms;
 
 
-public class ResverseString {
+public class ResverseString { 
 
 	public static void main(String[] args) {
 

@@ -22,7 +22,7 @@ public class PalindromeString {
 		
 		
 		result = "";
-		for (int i = arr.length - 1; i >= 0; i--) {
+		for (int i = s.length() - 1; i >= 0; i--) {
 			result = result.concat(String.valueOf(s.charAt(i)));
 		}
 		if (s.equals(result))

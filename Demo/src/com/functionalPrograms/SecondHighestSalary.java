@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class SecondHighestSalary {
-
+ 
 	public static void main(String[] args) {
 		
 		List<Employee> list = new ArrayList<Employee>();

@@ -187,3 +187,37 @@ public class Ancryption {
 	}
 
 }
+
+
+
+
+/* AES is a symmetric encryption algorithm—meaning the same key is used for both encryption and decryption.
+AES supports three key lengths:
+128 bits
+192 bits
+256 bits These key lengths correspond to different levels of security: the longer the key, the stronger the encryption.
+
+Input Data: The input to AES is the plaintext (original data) and a secret key.
+Key Expansion: AES performs a series of transformations (substitutions, permutations, and mixing) over multiple rounds. The number of rounds depends on the key length:
+10 rounds for 128-bit keys
+12 rounds for 192-bit keys
+14 rounds for 256-bit keys
+Decryption: The decryption process essentially reverses the encryption steps using the same key.
+
+Symmetric Encryption (AES): Uses the same key for both encryption and decryption. It is fast and suitable for encrypting large amounts of data.
+Asymmetric Encryption (RSA): Uses two keys—a public key for encryption and a private key for decryption. It is slower and typically used for 
+securing small amounts of data like encryption keys, rather than bulk data.
+
+
+Symmetric: AES, DES, 3DES, Blowfish
+Asymmetric: RSA, ECC (Elliptic Curve Cryptography)
+
+
+
+
+
+
+
+*/
+
+
