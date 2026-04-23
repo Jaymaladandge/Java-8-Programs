@@ -88,6 +88,9 @@ public class ConsumerDemo {
 			}
 		};
 		System.out.println("s : "+s.get().get());
+		
+		Supplier<Long> s1 = () -> 10L;
+		System.out.println(s1.get());
 	}
 
 }

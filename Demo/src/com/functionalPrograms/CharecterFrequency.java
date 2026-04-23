@@ -1,6 +1,8 @@
 package com.functionalPrograms;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -25,12 +27,25 @@ public class CharecterFrequency {
 		Map<String, Long> map2 = Arrays.stream(arr).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 		map2.forEach((k, v) -> System.out.println(k + " " + v));
 
-		
-		System.out.println("--------------------------------------");
-
+		System.out.println("-----------------------------------");
 		
 		Map<Character, Long> map3 = s.chars().mapToObj(i -> (char) i).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 		map3.forEach((k, v) -> System.out.println(k + " " + v));
+		
+		System.out.println("-------------------------------------");
+		
+		String str = "Hello Wowld";
+		String[] arr1 = str.split("");
+		HashMap<String, Integer> map1 = new HashMap<>();
+
+		for (String s1 : arr1) {
+			if (map1.containsKey(s1)) {
+				map1.put(s1, map1.get(s1) + 1);
+			} else {
+				map1.put(s1, 1);
+			}
+		}
+		map1.forEach((k, v) -> System.out.println(k + "  " + v));
 	}
 
 }

@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import com.functionalPrograms.Employee;
 import com.test.lambda.Product;
 
 public class ListDemo {
@@ -77,6 +78,19 @@ public class ListDemo {
 		List<Integer> sortedList = list.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
 		System.out.println(sortedList);
 
+		System.out.println("------------------------");
+		
+		List<Employee> emps = new ArrayList<>();
+		emps.add(new Employee("666", "krutika", 750000));
+		emps.add(new Employee("555", "rashmi", 750000));		
+		emps.add(new Employee("111", "paurnima", 60000));
+		emps.add(new Employee("777", "kiran", 65000));
+		emps.stream().sorted(Comparator.comparingDouble(Employee::getSalary).reversed()).forEach(System.out::println);
+		System.out.println("----");
+		emps.stream().sorted(Comparator.comparingDouble(Employee::getSalary).thenComparing(Employee::getName)).forEach(System.out::println);
+
+		
+		
 		System.out.println("-----------------------");
 		HashMap<String, Integer> mapcon = new HashMap<>();
 		mapcon.put("k1", 100);
@@ -91,3 +105,15 @@ public class ListDemo {
 	}
 
 }
+
+/* 
+comparing() takes a function that extracts a key from an object.
+The extracted key can be of any type (U), which means it supports generic types (e.g., String, Integer, Double, etc.).
+Uses autoboxing when working with primitive types like int, double, etc. 
+
+
+comparingDouble() takes a function that returns a double value.
+Uses the primitive double without autoboxing, making it more efficient for floating-point comparisons.
+
+ */
+ 

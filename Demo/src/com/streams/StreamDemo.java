@@ -3,10 +3,14 @@ package com.streams;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalDouble;
+import java.util.TreeMap;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import com.functionalPrograms.Person;
 import com.test.lambda.Product;
 
 @SuppressWarnings("all")
@@ -49,16 +53,20 @@ public class StreamDemo {
 		
 		System.out.println("--------------------");
 		List<Integer> array = Arrays.asList(4, 6, 2);
-		int sum = array.stream().reduce(2, (element1, element2) -> element1 * element2);
+		int sum = array.stream().reduce(1, (element1, element2) -> element1 * element2);
 		System.out.println("The sum of all elements is " + sum);
 
 		
 		
-		System.out.println("----------------------------");
+		System.out.println("--------------longestString--------------");
 		Optional<String> longestString = list.stream()
 				.reduce((word1, word2) -> word1.length() > word2.length() ? word1 : word2);
 		longestString.ifPresent(System.out::println);
 
+		
+		List<Integer> num = Arrays.asList(45, 25, 98, 35, 47);
+		int big = num.stream().reduce((n1, n2) -> n1 > n2 ? n1 : n2).get();
+		System.out.println("----big-----"+big);
 		
 		
 		System.out.println("-------------Optional--------------");
@@ -90,11 +98,61 @@ public class StreamDemo {
 		System.out.println("totalPrice3 : " + totalPrice3);
 		
 		
-		
-		
-		
-		
 		Product product = productList.stream().max((p1, p2)-> p1.getPrice() > p2.getPrice() ? 1 : -1).get();
 		System.out.println("product : "+product);
+		
+		
+		
+		System.out.println("--------------------------------------");
+		
+		
+		List<Person> list1 = new ArrayList<>(); 
+		list1.add(new Person("kasturi","mumbai", "Maharashtra",20000));
+		list1.add(new Person("bakula", "pune", "Maharashtra",32000));
+		list1.add(new Person("phulwanti", "mumbai", "Maharashtra",50000));
+		list1.add(new Person("krutika", "ujjain", "Mp",25000));
+		
+		
+		System.out.println("------Grouping + transformation  - ------\n");
+		list1.stream().collect(Collectors.groupingBy(p -> p.getState(),Collectors.mapping(n -> n.getName(), Collectors.toSet()))).forEach((k,v) -> System.out.println(k + " " + v));
+		System.out.println("----");
+		list1.stream().collect(Collectors.groupingBy(p -> p.getState(),Collectors.counting())).forEach((k,v) -> System.out.println(k + " " + v));
+		System.out.println("---Group by state and city--");
+		list1.stream().collect(Collectors.groupingBy(p -> p.getState(), Collectors.groupingBy(c -> c.getCity()))).forEach((k,v) -> System.out.println(k + " " + v));
+		
+		
+		System.out.println("------Simple grouping - Group by state------\n");
+		list1.stream().collect(Collectors.groupingBy(p -> p.getState())).forEach((k,v) -> System.out.println(k + " " + v));
+		
+		
+		System.out.println("-----Custom Map (e.g., sorted keys) - Sort map keys in ascending order------\n");
+		list1.stream().collect(Collectors.groupingBy(p -> p.getState(), TreeMap::new, Collectors.counting())).forEach((k,v) -> System.out.println(k + " " + v));
+		
+		
+		long count = list1.stream().collect(Collectors.filtering(p -> p.getSalary() > 25000, Collectors.counting()));
+		System.out.println("count : "+count);
+		
+		list1.stream().collect(Collectors.groupingBy(Person::getState, Collectors.filtering(p -> p.getSalary()>20000, Collectors.mapping(p -> p.getName(), Collectors.toList()))))
+				.forEach((k,v) -> System.out.println(k + " = " + v));
+		
+		Person p =list1.stream().collect(Collectors.reducing((p1, p2) -> p1.getSalary() > p2.getSalary() ? p1 : p2)).get();
+		System.out.println("Highest salary : "+ p);
+		
+		double highSal = list1.stream().collect(Collectors.reducing(0, person -> p.getSalary(), (p1, p2) -> p1.doubleValue() > p2.doubleValue() ? p1 : p2)).doubleValue();
+		System.out.println("Highest salary : "+ highSal);
+		
+		
+		
+		String s = list1.stream().collect(Collectors.mapping(person -> person.getName(), Collectors.joining(" & ")));
+		System.out.println(s);
+		System.out.println("---------------");
+		
+		Map<Boolean, List<Person>> map = list1.stream().collect(Collectors.partitioningBy(person -> person.getSalary() > 25000));
+		for(Map.Entry<Boolean, List<Person>> entry : map.entrySet()) {
+			System.out.println(entry);
+		}
+		
+		list1.stream().collect(Collectors.partitioningBy(person -> person.getSalary() > 25000, Collectors.mapping(Person::getName, Collectors.toList())))
+					  .forEach((k,v) -> System.out.println(k + " " + v));
 	}
 }

@@ -25,11 +25,20 @@ public class ReverseSort {
 		System.out.println("----------------------------");
 
 		List<Employee> emps = new ArrayList<>();
+		emps.add(new Employee("666", "krutika", 750000));
 		emps.add(new Employee("555", "rashmi", 750000));
 		emps.add(new Employee("111", "paurnima", 60000));
 		emps.add(new Employee("777", "kiran", 65000));
 
 		emps.stream().sorted(Comparator.comparing(e -> e.getId())).forEach(System.out::println);
+		System.out.println("----");
+		
+		emps.stream().sorted(Comparator.comparingDouble(Employee::getSalary).reversed()).forEach(System.out::println);
+		System.out.println("----");
+		
+		emps.stream().sorted(Comparator.comparingDouble(Employee::getSalary).thenComparing(Employee::getName).reversed()).forEach(System.out::println);
+
+
 
 	}
 }

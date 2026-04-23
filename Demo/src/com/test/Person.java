@@ -42,7 +42,7 @@ public class Person {
 		System.out.println("Address : " +address);
 		System.out.println("address==address1 : " +(address==address1));
 		
-		address.setCity("pune");
+		person.getAddress().setCity("pune");
 		System.out.println("Person's address : "+person.getAddress());
 	}
 }
